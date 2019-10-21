@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mnThongtinsach"
+        android:title="mnThongtinsach" />
+    <item
+        android:id="@+id/mnThongtintacgia"
+        android:title="mnThongtintacgia" />
+    <item
+        android:id="@+id/mnTimkiem"
+        android:title="mnTimkiem Sach/Tacgia" />
+</menu>
