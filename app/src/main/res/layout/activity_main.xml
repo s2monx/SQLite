@@ -13,70 +13,70 @@
         android:layout_height="wrap_content"
         android:text="btnExit" />
 
-    <EditText
-        android:id="@+id/etMaso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="etMaso"
-        android:inputType="textPersonName" />
+<!--    <EditText-->
+<!--        android:id="@+id/etMatacgia"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="etMaSach"-->
+<!--        android:inputType="textPersonName" />-->
 
-    <EditText
-        android:id="@+id/etTieude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="etTieude"
-        android:inputType="textPersonName" />
+<!--    <EditText-->
+<!--        android:id="@+id/etDiachi"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="etTieude"-->
+<!--        android:inputType="textPersonName" />-->
 
-    <EditText
-        android:id="@+id/etTacgia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="etTacgia"
-        android:inputType="textPersonName" />
+<!--    <EditText-->
+<!--        android:id="@+id/etEmail"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="etMaTacgia"-->
+<!--        android:inputType="textPersonName" />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/btnSelect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Select" />
+<!--        <Button-->
+<!--            android:id="@+id/btnSelect"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Select" />-->
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Save" />
+<!--        <Button-->
+<!--            android:id="@+id/btnSave"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Save" />-->
 
-        <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Delete" />
+<!--        <Button-->
+<!--            android:id="@+id/btnDelete"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Delete" />-->
 
-        <Button
-            android:id="@+id/btnUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Update" />
-    </LinearLayout>
+<!--        <Button-->
+<!--            android:id="@+id/btnUpdate"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Update" />-->
+<!--    </LinearLayout>-->
 
-    <GridView
-        android:id="@+id/gvItem"
-        android:layout_width="match_parent"
-        android:layout_height="440dp"
-        android:numColumns="3">
+<!--    <GridView-->
+<!--        android:id="@+id/gvItem"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="440dp"-->
+<!--        android:numColumns="3">-->
 
-    </GridView>
+<!--    </GridView>-->
 
 </LinearLayout>

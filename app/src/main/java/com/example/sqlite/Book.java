@@ -1,25 +1,25 @@
 package com.example.sqlite;
 
 public class Book {
-    private int id;
+    private int id_book;
     private String title;
-    private String author;
+    private int id_author;
 
-    public Book(int id, String title, String author) {
-        this.id = id;
+    public Book(int id_book, String title, int id_author) {
+        this.id_book = id_book;
         this.title = title;
-        this.author = author;
+        this.id_author = id_author;
     }
 
     public Book() {
     }
 
-    public int getId() {
-        return id;
+    public int getId_book() {
+        return id_book;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_book(int id_book) {
+        this.id_book = id_book;
     }
 
     public String getTitle() {
@@ -30,20 +30,20 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getId_author() {
+        return id_author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setId_author(int id_author) {
+        this.id_author = id_author;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "id_book=" + id_book +
                 ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
+                ", id_author=" + id_author +
                 '}';
     }
 }
