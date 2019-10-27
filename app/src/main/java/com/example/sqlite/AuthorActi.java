@@ -2,12 +2,15 @@ package com.example.sqlite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,11 +20,14 @@ public class AuthorActi extends AppCompatActivity {
     Button btnSave, btnSelect, btnExit, btnDelete, btnUpdate;
     GridView gvItem;
     DBHelper dbHelper;
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_author);
-        Anhxa();
+        final Dialog d = new Dialog(AuthorActi.this);
+        d.setContentView(R.layout.activity_author);
+        Anhxa(d);
         //nut save
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,8 +37,10 @@ public class AuthorActi extends AppCompatActivity {
                 author.setAddress(etDiachi.getText().toString());
                 author.setName(etHoten.getText().toString());
                 author.setEmail(etEmail.getText().toString());
-                if (dbHelper.insertAuthor(author)==1)
+                if (dbHelper.insertAuthor(author)) {
                     Toast.makeText(AuthorActi.this, "Da luu thanh cong", Toast.LENGTH_SHORT).show();
+                    clear();
+                }
                 else
                     Toast.makeText(AuthorActi.this, "Luu khong thanh cong", Toast.LENGTH_SHORT).show();
 
@@ -52,18 +60,15 @@ public class AuthorActi extends AppCompatActivity {
                         list.add(a.getAddress());
                         list.add(a.getEmail());
                     }
-//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_expandable_list_item_1, list);
-//                    gvItem.setAdapter(adapter);
                 }
                 else{
                     Author author = dbHelper.getAuthor(Integer.parseInt(et_Matacgia.getText().toString()));
-
                     list.add(author.getId_author() + "");
                     list.add(author.getName());
                     list.add(author.getAddress());
                     list.add(author.getEmail());
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AuthorActi.this, android.R.layout.simple_expandable_list_item_1, list);
+                adapter = new ArrayAdapter<String>(AuthorActi.this, android.R.layout.simple_expandable_list_item_1, list);
                 gvItem.setAdapter(adapter);
             }
         });
@@ -78,22 +83,46 @@ public class AuthorActi extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String id = et_Matacgia.getText().toString();
+                try {
+                    if (!id.isEmpty()) {
+                        int idkq = Integer.parseInt(id);
+                        dbHelper.deleteAuthor(idkq);
+                        adapter.notifyDataSetChanged();
+                        clear();
+                        Toast.makeText(getApplicationContext(), "Xoa thanh cong", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Xoa khong thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                }catch (Exception e){
+                    Toast.makeText(AuthorActi.this, "Ma tac gia khong ton tai", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        d.show();
+        Window w = d.getWindow();
+        w.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
     }
-    public void Anhxa(){
-        et_Matacgia = findViewById(R.id.etMatacgia);
-        etDiachi = findViewById(R.id.etDiachi);
-        etEmail = findViewById(R.id.etEmail);
-        etHoten = findViewById(R.id.etHoten);
-        btnSave = findViewById(R.id.btnSave);
-        btnSelect = findViewById(R.id.btnSelect);
-        btnExit = findViewById(R.id.btnExit);
-        btnDelete = findViewById(R.id.btnDelete);
-        btnUpdate = findViewById(R.id.btnUpdate);
-        gvItem = findViewById(R.id.gvItem);
 
+    private void clear() {
+        et_Matacgia.setText(null);
+        etDiachi.setText(null);
+        etHoten.setText(null);
+        etEmail.setText(null);
+        et_Matacgia.requestFocus();
+    }
+
+    public void Anhxa(Dialog d){
+        et_Matacgia = d.findViewById(R.id.etMatacgia);
+        etDiachi = d.findViewById(R.id.etDiachi);
+        etEmail = d.findViewById(R.id.etEmail);
+        etHoten = d.findViewById(R.id.etHoten);
+        btnSave = d.findViewById(R.id.btnSave);
+        btnSelect = d.findViewById(R.id.btnSelect);
+        btnExit = d.findViewById(R.id.btnExit);
+        btnDelete = d.findViewById(R.id.btnDelete);
+        btnUpdate = d.findViewById(R.id.btnUpdate);
+        gvItem = d.findViewById(R.id.gvItem);
         dbHelper = new DBHelper(this);
     }
 }

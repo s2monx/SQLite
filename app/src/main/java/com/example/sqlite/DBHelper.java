@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table Authors(id_author integer primary key,name text,address text, email text)");
 
         sqLiteDatabase.execSQL("create table Book(id_book integer primary key,"+"title text," +
-                "id_author integer " + "constraint id_author references Authors(id_author)" + "on delete cascade on update cascade)");
+                "id_author integer " + "constraint fk_id_author references Authors(id_author)" + "on delete cascade on update cascade)");
     }
 
     @Override
@@ -33,33 +33,31 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public int insertBook(Book book) {
+    public boolean insertBook(Book book) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_book",book.getId_book());
         contentValues.put("title",book.getTitle());
         contentValues.put("id_author",book.getId_author());
         db.insert("Book",null, contentValues);
-        int result = (int)db.insert("Book", null, contentValues);
-        return result;
+        return true;
     }
-    public int insertAuthor(Author author) {
+    public boolean insertAuthor(Author author) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_author",author.getId_author());
         contentValues.put("name",author.getName());
         contentValues.put("address",author.getAddress());
         contentValues.put("email",author.getEmail());
-        //db.insert("Book",null, contentValues);
-        //return true;
-        int result = (int)db.insert("Authors", null, contentValues);
-        return result;
+        db.insert("Authors",null, contentValues);
+        return true;
+
     }
 
-    public  Book getBook(int id){
+    public  Book getBook(int id_book){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from Book where id="+
-                id, null);
+        Cursor cursor = db.rawQuery("select * from Book where id_book="+
+                id_book, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
@@ -114,9 +112,25 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public boolean deleteBook(int id){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("delete from Authors where id="+id,null);
-        if(db.delete("Books","id_book = ?", new String[]{String.valueOf(id)})>0){
-            db.close();
+        Cursor cursor = db.rawQuery("delete from Book where id_book ="+id,null);
+        if (cursor == null){
+            return false;
+        }
+        else{
+            cursor.moveToFirst();
+            cursor.close();
+        }
+        return true;
+    }
+    public boolean deleteAuthor(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("delete from Authors where id_author ="+id,null);
+        if (cursor == null){
+            return false;
+        }
+        else{
+            cursor.moveToFirst();
+            cursor.close();
         }
         return true;
     }
@@ -125,10 +139,18 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", book.getTitle());
         contentValues.put("id_author", book.getId_author());
-        if(db.update("Books", contentValues, "id_book = ?", new String[]{String.valueOf(book.getId_book())})>0){
-            db.close();
-        }
+        contentValues.put("id_book", book.getId_book());
+        db.update("Book", contentValues, "id_book = ?", new String[]{String.valueOf(book.getId_book())});
         return true;
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("address", author.getAuthorAddress());
+//        contentValues.put("email", author.getAuthorEmail());
+//        contentValues.put("id_author", author.getAuthorID());
+//        contentValues.put("name", author.getAuthorName());
+//        db.update("Author", contentValues, "id_author = ?",
+//                new String[]{Integer.toString(author.getAuthorID())});
+//        return true;
     }
 
     public ArrayList<String> getBookAuthor(int id){
